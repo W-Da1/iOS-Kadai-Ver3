@@ -47,7 +47,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 画面遷移時に呼ばれる
-        githubData.touchedCellIndex = indexPath.row
+        githubData.touchedCellRowSet(indexPath.row)
         performSegue(withIdentifier: "Detail", sender: self)
     }
 
@@ -79,12 +79,7 @@ extension SearchViewController {
         //print("ボタンは押してるよ")
         guard let searchWord = searchBar.text else {return}
         if !searchWord.isEmpty {
-            githubData.createURLSessionTaskOfGithubData(searchWord)
-            //print("URLセッションタスクは作ったよ")
-            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                // これ呼ばなきゃリストが更新されません
-                self?.githubData.urlSessionTaskOfGithubData?.resume()
-            }
+            githubData.search(searchWord)
         }
     }
 

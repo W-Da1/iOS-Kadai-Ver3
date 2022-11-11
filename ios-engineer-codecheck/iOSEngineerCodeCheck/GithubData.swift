@@ -49,5 +49,18 @@ class GithubData {
             self?.notification.post(name: self!.notificationNameImage, object: nil)
         }
     }
+    
+    func search(_ searchWord: String) {
+        self.createURLSessionTaskOfGithubData(searchWord)
+        //print("URLセッションタスクは作ったよ")
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            // これ呼ばなきゃリストが更新されません
+            self?.urlSessionTaskOfGithubData?.resume()
+        }
+    }
+
+    func touchedCellRowSet(_ row: Int) {
+        self.touchedCellIndex = row
+    }
 
 }
