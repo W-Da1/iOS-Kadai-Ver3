@@ -1,3 +1,5 @@
+iOS-Kadai-ver2の修正版です．
+# バグなしで一通り動作します．
 # iOS-Kadai-ver3
 
 ## 概要
